@@ -1,0 +1,13 @@
+
+GET    /                                                           controllers.Workflows.index
+
+POST   /workflows                                                  controllers.Workflows.addWorkflow
+
+POST   /workflows/:workflow_id/executions                          controllers.Workflows.addExecution(workflow_id: Int)
+
+PUT    /workflows/:workflow_id/executions/:workflow_execution_id   controllers.Workflows.incrementStep(workflow_id: Int, workflow_execution_id: Int)
+
+GET    /workflows/:workflow_id/executions/:workflow_execution_id   controllers.Workflows.executionState(workflow_id: Int, workflow_execution_id: Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/*file                                               controllers.Assets.versioned(path="/public", file: Asset)

@@ -3,7 +3,7 @@ package models
 import play.api.libs.json._
 
 import java.util.Date
-import scala.collection.mutable.{ Map => MMap }
+import scala.collection.concurrent.{ TrieMap => MMap }
 
 /*
  * Class to create workflows with a number of steps

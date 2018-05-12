@@ -1,7 +1,7 @@
 package controllers
 
 import java.util.Date
-import scala.collection.mutable.{ Map => MMap }
+import scala.collection.concurrent.{ TrieMap => MMap }
 
 import org.scalatestplus.play._
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
@@ -118,6 +118,5 @@ class WorkflowSpec extends PlaySpec with GuiceOneAppPerTest with Injecting {
 			val result = route(app, request).get
 			status(result) mustBe 200
 		}
-
 	}
 }

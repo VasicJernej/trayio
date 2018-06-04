@@ -20,13 +20,13 @@ class WorkflowsController @Inject() (cc: ControllerComponents) extends AbstractC
 		request.body.validate[Workflow].map { x =>
 			{
 				val workflowId = Workflows.workflowsMap.size + 1
-				Workflows.workflowsMap += workflowId -> Works(
+				Workflows.workflowsMap.putIfAbsent(workflowId, Works(
 					Workflow(
 						workflowId = Some(workflowId),
 						numberOfSteps = x.numberOfSteps
 					),
 					None
-				)
+				))
 				Created(Json.obj(
 					Constants.status -> Constants.created,
 					Constants.workflowId -> workflowId
@@ -48,7 +48,7 @@ class WorkflowsController @Inject() (cc: ControllerComponents) extends AbstractC
 				workflowExecutionId = wf.workflowId.get,
 				creationDate = new Date().getTime.toString()
 			)
-			Workflows.workflowsMap(workflow_id) = Works(wf, Some(execution))
+			Workflows.workflowsMap.putIfAbsent(wf.workflowId.get, Works(wf, Some(execution)))
 			Created(
 				Json.obj(
 					Constants.status -> Constants.created,
